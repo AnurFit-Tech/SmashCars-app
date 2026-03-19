@@ -1,0 +1,245 @@
+<div class="address-container">
+
+  <!-- HEADER -->
+  <div class="address-header">
+    <h2>Address</h2>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="address-table-card">
+    <table>
+      <thead>
+        <tr>
+          <th (click)="sort('addressID')">
+        AddressID
+           <span *ngIf="sortColumn === 'addressID'">
+              {{ sortDirection === 'asc' ? '▲' : '▼' }}
+          </span>
+          </th>
+  
+          <th>UserID</th>
+
+          <th (click)="sort('street')">
+  Street
+  <span *ngIf="sortColumn === 'street'">
+    {{ sortDirection === 'asc' ? '▲' : '▼' }}
+  </span>
+</th>
+          <th>City</th>
+          <th>Country</th>
+          <th>Postal Code</th>
+          <th>Additional Info</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let x of addressesList">
+          <td>{{ x.addressID }}</td>
+          <td>{{ x.userID }}</td>
+          <td>{{ x.street }}</td>
+          <td>{{ x.city }}</td>
+          <td>{{ x.country }}</td>
+          <td>{{ x.postalCode }}</td>
+          <td class="muted">{{ x.additionalInfo || '-' }}</td>
+          <td class="actions">
+  <button class="btn-icon edit" (click)="startEdit(x)">
+    edit
+  </button>
+</td>
+
+        </tr>
+        <tr *ngIf="addressesList.length === 0" class="no-data">
+  <td colspan="7">No address found</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SEARCH SECTION -->
+<div class="address-search">
+  <input
+    type="number"
+    placeholder="Search Address By Id..."
+    [(ngModel)]="searchAddressId"
+  />
+  <button type="button" (click)="searchById()">Search</button>
+<button type="button" class="reset-btn" (click)="resetSearch()">Reset</button>
+</div>
+
+<!-- MULTI SEARCH -->
+<!-- ADVANCED SEARCH -->
+<div class="address-advanced-search">
+
+  <div class="search-row">
+
+    <div class="search-field">
+      <label>Street</label>
+      <input type="text" [(ngModel)]="search.street">
+    </div>
+
+    <div class="search-field">
+      <label>City</label>
+      <input type="text" [(ngModel)]="search.city">
+    </div>
+
+    <div class="search-field">
+      <label>Country</label>
+      <input type="text" [(ngModel)]="search.country">
+    </div>
+
+    <div class="search-field">
+      <label>Postal Code</label>
+      <input type="text" [(ngModel)]="search.postalCode">
+    </div>
+
+    <div class="search-field">
+      <label>Additional Info</label>
+      <input type="text" [(ngModel)]="search.additionalInfo">
+    </div>
+
+  </div>
+
+  <div class="search-actions">
+    <button class="btn-search" (click)="searchById()">Search</button>
+    <button class="btn-reset" (click)="resetSearch()">Reset</button>
+  </div>
+
+  <!-- DELETE SECTION -->
+</div>
+  <div class="address-delete">
+    <input
+      type="number"
+      placeholder="Delete Address By Id..."
+      [(ngModel)]="deleteAddressId"
+    />
+    <button type="button" (click)="deleteById()">Delete</button>
+  </div>
+
+<div class="address-create" *ngIf="editingAddress">
+
+  <h3>Update Address (ID {{ editingAddress.addressID }})</h3>
+
+  <div class="search-row">
+    <div class="search-field">
+      <label>User ID *</label>
+      <input type="number" [(ngModel)]="editingAddress.userID">
+    </div>
+
+    <div class="search-field">
+      <label>Street *</label>
+      <input type="text" [(ngModel)]="editingAddress.street">
+    </div>
+
+    <div class="search-field">
+      <label>City</label>
+      <input type="text" [(ngModel)]="editingAddress.city">
+    </div>
+
+    <div class="search-field">
+      <label>Country</label>
+      <input type="text" [(ngModel)]="editingAddress.country">
+    </div>
+
+    <div class="search-field">
+      <label>Postal Code</label>
+      <input type="text" [(ngModel)]="editingAddress.postalCode">
+    </div>
+  </div>
+
+  <div class="search-row">
+    <div class="search-field" style="grid-column: span 5;">
+      <label>Additional Info</label>
+      <input type="text" [(ngModel)]="editingAddress.additionalInfo">
+    </div>
+  </div>
+
+  <div class="search-actions">
+    <button (click)="updateAddress()">Save</button>
+    <button class="btn-reset" (click)="editingAddress = null">Cancel</button>
+  </div>
+
+</div>
+
+
+
+
+
+
+<div class="address-create" *ngIf="showCreateForm">
+
+  <h3>Create New Address</h3>
+
+  <div class="search-row">
+    <div class="search-field">
+      <label>User ID *</label>
+      <input type="number" [(ngModel)]="newAddress.userID"
+      (ngModelChange)="autoSave()">
+    </div>
+
+    <div class="search-field">
+      <label>Street *</label>
+      <input type="text" [(ngModel)]="newAddress.street"
+      (ngModelChange)="autoSave()">
+    </div>
+
+    <div class="search-field">
+  <label>City</label>
+  <input type="text"
+         [(ngModel)]="newAddress.city"
+         (input)="filterCities(); autoSave()"
+         [attr.list]="'city-list'">
+  <datalist id="city-list">
+    <option *ngFor="let city of filteredCities" [value]="city"></option>
+  </datalist>
+</div>
+
+    <div class="search-field">
+  <label>Country</label>
+  <input type="text"
+         [(ngModel)]="newAddress.country"
+         (input)="filterCountries(); autoSave()"
+         [attr.list]="'country-list'">
+  <datalist id="country-list">
+    <option *ngFor="let country of filteredCountries" [value]="country"></option>
+  </datalist>
+</div>
+
+    <div class="search-field">
+      <label>Postal Code</label>
+      <input type="text" [(ngModel)]="newAddress.postalCode"
+      (ngModelChange)="autoSave()">
+    </div>
+  </div>
+
+  <div class="search-row">
+    <div class="search-field" style="grid-column: span 5;">
+      <label>Additional Info</label>
+      <input type="text" [(ngModel)]="newAddress.additionalInfo"
+      (ngModelChange)="autoSave()">
+    </div>
+  </div>
+
+  <div class="search-actions">
+    <button (click)="createAddress()">Create</button>
+    <button
+      class="btn-reset"
+      (click)="newAddress = { userID: 0, street: '', city: '', country: '', postalCode: '', additionalInfo: '' }"
+    >
+      Reset
+    </button>
+  </div>
+
+</div>
+
+<!-- CREATE BUTTON -->
+<div class="address-create-toggle">
+  <button (click)="toggleCreateForm()">
+    {{ showCreateForm ? 'Close' : 'Create New Address' }}
+  </button>
+</div>
+
+
+</div>
+
+
