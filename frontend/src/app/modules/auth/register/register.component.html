@@ -1,0 +1,91 @@
+<div class="auth-container">
+  <div class="auth-background">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+  </div>
+
+  <div class="auth-content">
+    <div class="auth-brand">
+      <mat-icon class="brand-icon">person_add</mat-icon>
+      <h1 class="brand-name">FIT Market</h1>
+      <p class="brand-tagline">Kreirajte novi nalog</p>
+    </div>
+
+    <mat-card class="auth-card mat-elevation-z8">
+      <mat-card-header>
+        <mat-card-title>REGISTRACIJA</mat-card-title>
+        <mat-card-subtitle>Popunite podatke ispod za registraciju</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div *ngIf="errorMessage" class="error-message">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+          <div class="name-row">
+            <!-- First Name -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Ime</mat-label>
+              <input matInput formControlName="firstName" type="text" placeholder="Ime" />
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-error *ngIf="form.get('firstName')?.hasError('required')">Obavezno</mat-error>
+            </mat-form-field>
+
+            <!-- Last Name -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Prezime</mat-label>
+              <input matInput formControlName="lastName" type="text" placeholder="Prezime" />
+              <mat-icon matPrefix>badge</mat-icon>
+              <mat-error *ngIf="form.get('lastName')?.hasError('required')">Obavezno</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Email -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email adresa</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="vasa.email@primjer.com" />
+            <mat-icon matPrefix>email</mat-icon>
+            <mat-error *ngIf="form.get('email')?.hasError('required')">Email je obavezan</mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('email')">Nevalidan format</mat-error>
+          </mat-form-field>
+
+          <!-- Password -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Lozinka</mat-label>
+            <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" placeholder="••••••••" />
+            <mat-icon matPrefix>lock</mat-icon>
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="form.get('password')?.hasError('required')">Lozinka je obavezna</mat-error>
+            <mat-error *ngIf="form.get('password')?.hasError('minlength')">Minimum 8 znakova</mat-error>
+          </mat-form-field>
+
+          <div class="actions">
+            <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="form.invalid || isLoading">
+              <ng-container *ngIf="!isLoading; else loadingTpl">
+                <mat-icon>how_to_reg</mat-icon>
+                REGISTRUJ SE
+              </ng-container>
+              <ng-template #loadingTpl>
+                <mat-progress-spinner mode="indeterminate" diameter="20" strokeWidth="3"></mat-progress-spinner>
+                <span>Slanje podataka...</span>
+              </ng-template>
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="auth-footer">
+      <p>Već imate nalog? <a routerLink="/auth/login">Prijavite se</a></p>
+      <a routerLink="/" class="back-link">
+        <mat-icon>arrow_back</mat-icon> Nazad na početnu
+      </a>
+    </div>
+  </div>
+</div>
