@@ -13,7 +13,11 @@ public sealed class RegisterCommandValidator : AbstractValidator<RegisterCommand
             .NotEmpty().WithMessage("Email is required.")
             .EmailAddress().WithMessage("Invalid email format.");
 
+<<<<<<< HEAD
         RuleFor(x => x.Password)
+=======
+        RuleFor(x => x.PasswordHash)
+>>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f
             .NotEmpty().WithMessage("Password is required.")
             .MinimumLength(6).WithMessage("Password must be at least 6 characters long.");
 

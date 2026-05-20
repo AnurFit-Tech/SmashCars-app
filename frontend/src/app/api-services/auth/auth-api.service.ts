@@ -7,8 +7,12 @@ import {
   LoginCommandDto,
   RefreshTokenCommand,
   RefreshTokenCommandDto,
+<<<<<<< HEAD
   LogoutCommand,
   RegisterCommand
+=======
+  LogoutCommand
+>>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f
 } from './auth-api.model';
 
 @Injectable({
@@ -25,6 +29,7 @@ export class AuthApiService {
   login(payload: LoginCommand): Observable<LoginCommandDto> {
     return this.http.post<LoginCommandDto>(`${this.baseUrl}/login`, payload);
   }
+<<<<<<< HEAD
   /**
    * POST /Auth/register
    * Šalje podatke novog korisnika na backend kako bi se spasili u bazu.
@@ -32,6 +37,9 @@ export class AuthApiService {
   register(payload: RegisterCommand): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/register`, payload);
   }
+=======
+
+>>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f
   /**
    * POST /Auth/refresh
    * Refresh access token using refresh token.
@@ -47,9 +55,13 @@ export class AuthApiService {
   logout(payload: LogoutCommand): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/logout`, payload);
   }
+<<<<<<< HEAD
   
 
  
 
 }
 
+=======
+}
+>>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f

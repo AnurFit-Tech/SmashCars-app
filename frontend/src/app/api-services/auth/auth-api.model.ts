@@ -57,6 +57,7 @@ export interface RefreshTokenCommandDto {
 export interface LogoutCommand {
   refreshToken: string;
 }
+<<<<<<< HEAD
 
 export interface RegisterCommand {
   firstName: string;
@@ -64,3 +65,5 @@ export interface RegisterCommand {
   email: string;
   password: string;
 }
+=======
+>>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f
