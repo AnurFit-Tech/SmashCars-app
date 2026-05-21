@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,15 +5,12 @@ import { BaseComponent } from '../../../core/components/base-classes/base-compon
 import { AuthFacadeService } from '../../../core/services/auth/auth-facade.service';
 import { RegisterCommand } from '../../../api-services/auth/auth-api.model';
 import { CurrentUserService } from '../../../core/services/auth/current-user.service';
-=======
 import { Component } from '@angular/core';
->>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f
 
 @Component({
   selector: 'app-register',
   standalone: false,
   templateUrl: './register.component.html',
-<<<<<<< HEAD
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent extends BaseComponent {
@@ -56,10 +52,8 @@ export class RegisterComponent extends BaseComponent {
     });
   }
 }
-=======
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
 
 }
->>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f

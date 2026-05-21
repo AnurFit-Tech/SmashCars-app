@@ -52,9 +52,7 @@ export class AuthFacadeService {
     this.initializeFromToken();
   }
 
-  // =========================================================
   // PUBLIC API
-  // =========================================================
 
   /**
    * Login korisnika (email + password).
@@ -113,9 +111,7 @@ export class AuthFacadeService {
     this.router.navigate(['/login']);
   }
 
-  // =========================================================
   // GETTERI ZA INTERCEPTOR
-  // =========================================================
 
   /**
    * Access token za Authorization header.
@@ -131,9 +127,7 @@ export class AuthFacadeService {
     return this.storage.getRefreshToken();
   }
 
-  // =========================================================
   // PRIVATE HELPERS
-  // =========================================================
 
   /**
    * Na startu aplikacije (konstruktor) – pokušaj obnoviti stanje iz postojećeg tokena.
@@ -175,7 +169,6 @@ export class AuthFacadeService {
     this._currentUser.set(null);
     this.storage.clear();
   }
-<<<<<<< HEAD
 
   /**
    * Registracija novog korisnika.
@@ -184,6 +177,4 @@ export class AuthFacadeService {
   register(payload: any): Observable<any> {
     return this.api.register(payload);
   }
-=======
->>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f
 }
