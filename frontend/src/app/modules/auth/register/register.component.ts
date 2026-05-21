@@ -6,7 +6,6 @@ import { AuthFacadeService } from '../../../core/services/auth/auth-facade.servi
 import { RegisterCommand } from '../../../api-services/auth/auth-api.model';
 import { CurrentUserService } from '../../../core/services/auth/current-user.service';
 
-
 @Component({
   selector: 'app-register',
   standalone: false,
