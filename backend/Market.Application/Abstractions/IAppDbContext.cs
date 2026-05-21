@@ -1,5 +1,5 @@
 ﻿using Market.Domain.Entities.Sales;
-
+using Market.Domain.Entities.Vehicle;
 namespace Market.Application.Abstractions;
 
 // Application layer
@@ -24,4 +24,9 @@ public interface IAppDbContext
 
     DbSet<WishlistEntity> Wishlists { get; }
     DbSet<WishlistProductEntity> WishlistProducts { get; }
+
+
+     DbSet<CarBrandEntity> CarBrands { get;  }
+     DbSet<CarGenerationEntity> CarGenerations { get;  }
+     DbSet<ProductCompatibilityEntity> ProductCompatibilities { get;  }
 }

@@ -1,6 +1,7 @@
 ﻿using Market.Application.Abstractions;
 using Market.Domain.Entities.Sales;
 using Microsoft.EntityFrameworkCore;
+using Market.Domain.Entities.Vehicle;
 namespace Market.Infrastructure.Database;
 
 public partial class DatabaseContext : DbContext, IAppDbContext
@@ -29,5 +30,11 @@ public partial class DatabaseContext : DbContext, IAppDbContext
     public DbSet<WishlistEntity> Wishlists =>Set<WishlistEntity>();
     public DbSet<WishlistProductEntity> WishlistProducts => Set<WishlistProductEntity>();
 
-    
+    public DbSet<CarBrandEntity> CarBrands => Set<CarBrandEntity>();
+    public DbSet<CarGenerationEntity> CarGenerations => Set<CarGenerationEntity>();
+    public DbSet<ProductCompatibilityEntity> ProductCompatibilities => Set<ProductCompatibilityEntity>();
+
+
+
+
 }

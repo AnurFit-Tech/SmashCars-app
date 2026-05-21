@@ -20,11 +20,7 @@ public sealed class RegisterCommandHandler(
             IsDeleted = false,
             CreatedAtUtc = DateTime.UtcNow
         };
-<<<<<<< HEAD
         user.PasswordHash = hasher.HashPassword(user, request.Password);
-=======
-        user.PasswordHash = hasher.HashPassword(user, request.PasswordHash);
->>>>>>> 6a48888646c86c501baeded77ea33ff6a281d23f
 
         ctx.Users.Add(user);
         await ctx.SaveChangesAsync(ct);
